@@ -22,6 +22,7 @@ sudo dnf install -y akmod-nvidia
 sudo dnf install -y gnome-tweaks
 sudo dnf install -y steam
 sudo dnf install -y gnome-power-manager
+sudo dnf install -y coolercontrol
 
 # Uninstall RPMs
 sudo dnf remove -y libreoffice-core # LibreOffice
@@ -46,12 +47,10 @@ flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flat
 flatpak update -y
 
 # Install Flatpak
-flatpak install flathub net.davidotek.pupgui2 # ProtonUp-Qt
-flatpak install flathub com.spotify.Client
-flatpak install flathub com.mattjakeman.ExtensionManager # Gnome Extension Manager
-flatpak install flathub com.rtosta.zapzap # Whatsapp App
-flatpak install flathub com.todoist.Todoist
-flatpak install flathub md.obsidian.Obsidian
+flatpak install -y flathub net.davidotek.pupgui2 # ProtonUp-Qt
+flatpak install -y flathub com.spotify.Client
+flatpak install -y flathub com.mattjakeman.ExtensionManager # Gnome Extension Manager
+flatpak install -y flathub com.rtosta.zapzap # Whatsapp App
 
 # Install Oh My ZSH
 sudo dnf install -y zsh curl util-linux-user
@@ -62,23 +61,7 @@ chsh -s "$(which zsh)"
 curl -sS https://starship.rs/install.sh | sh
 echo 'eval "$(starship init zsh)"' >>~/.zshrc
 
-# GNOME Settings
-gsettings set org.gnome.desktop.interface clock-format '24h'
-gsettings set org.gnome.desktop.interface clock-show-date true
-gsettings set org.gnome.desktop.interface clock-show-seconds false
-gsettings set org.gnome.desktop.interface clock-show-weekday false
-gsettings set org.gnome.shell.window-switcher current-workspace-only false
-gsettings set org.gnome.desktop.interface show-battery-percentage true
-gsettings set org.gnome.desktop.wm.preferences button-layout ":minimize,maximize,close"
-gsettings set org.gnome.mutter center-new-windows true
-gsettings set org.gnome.mutter auto-maximize false
-gsettings set org.gnome.mutter experimental-features "['scale-monitor-framebuffer']" #Experimental
 
-# GNOME Fonts Settings
-gsettings set org.gnome.desktop.interface document-font-name 'Noto Sans Regular 10'
-gsettings set org.gnome.desktop.interface font-name 'Noto Sans Regular 10'
-gsettings set org.gnome.desktop.interface monospace-font-name 'JetBrains Mono 10'
-gsettings set org.gnome.desktop.wm.preferences titlebar-font 'Noto Sans Regular 10'
+bash ./run-gnome-settings.sh
 
-# Manual configurations
-# TODO
+bash ./run-fix-cedilla.sh
