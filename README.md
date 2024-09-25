@@ -1,5 +1,5 @@
 
-# fedoraworkstations-postiinstall
+# fedoraworkstations-postinstall
 
 <p align="center">
     <img src="static/logo.png" alt="Fedora Logo" width="180">
