@@ -11,17 +11,18 @@ echo 'max_parallel_downloads=10' | sudo tee -a /etc/dnf/dnf.conf
 
 # Enable RPM Fusion (free and nonfree)
 sudo dnf install -y \
-    https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-$(rpm -E %fedora).noarch.rpm \
-    https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-$(rpm -E %fedora).noarch.rpm
+    https://mirrors.rpmfusion.org/free/fedora/rpmfusion-free-release-"$(rpm -E %fedora)".noarch.rpm \
+    https://mirrors.rpmfusion.org/nonfree/fedora/rpmfusion-nonfree-release-"$(rpm -E %fedora)".noarch.rpm
 sudo dnf upgrade --refresh -y
 sudo dnf groupupdate -y core
 sudo dnf install -y rpmfusion-free-release-tainted dnf-plugins-core
 
 # Install Nvidia Drivers if available
 if [ "$(lspci | grep -ic NVIDIA)" -eq 0 ]; then
+    echo "No NVIDIA GPU found on the system"
+else
     sudo dnf install -y akmod-nvidia
 fi
-
 # Install RPM Packages
 bash ./scripts/run-install-dnf-pkgs.sh
 
