@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # Update Firmware
 sudo fwupdmgr get-devices
 sudo fwupdmgr refresh --force
@@ -18,50 +20,25 @@ sudo dnf install -y rpmfusion-free-release-tainted dnf-plugins-core
 # Install Nvidia Drivers
 sudo dnf install -y akmod-nvidia
 
-# Install RPMs
-sudo dnf install -y gnome-tweaks
-sudo dnf install -y steam
-sudo dnf install -y gnome-power-manager
-sudo dnf install -y coolercontrol
+# Install RPM Packages
+bash ./scripts/run-install-dnf-pkgs.sh
 
-# Uninstall RPMs
-sudo dnf remove -y libreoffice-core # LibreOffice
-sudo dnf remove -y gnome-contacts   # Contacts
-sudo dnf remove -y gnome-weather    # Weather
-sudo dnf remove -y simple-scan      # Document Scanner
-sudo dnf remove -y gnome-tour       # Tour
-sudo dnf remove -y gnome-maps       # Maps
-sudo dnf remove -y gnome-clocks     # Clocks
-sudo dnf remove -y totem            # Videos
-sudo dnf remove -y yelp             # Help
-sudo dnf remove -y mediawriter      # Fedora Media Writer
-sudo dnf remove -y rhythmbox        # Rhythmbox
-sudo dnf remove -y snapshot         # Camera
+# Uninstall RPM Packages - Debloating the system
+bash ./scripts/run-remove-dnf-pkgs.sh
 
 # DNF Clean
 sudo dnf autoremove
 sudo dnf clean all
 
-#Enable Flatpak
+#Enable Flatpak with Flathub remote
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 flatpak update -y
 
-# Install Flatpak
-flatpak install -y flathub net.davidotek.pupgui2 # ProtonUp-Qt
-flatpak install -y flathub com.spotify.Client
-flatpak install -y flathub com.mattjakeman.ExtensionManager # Gnome Extension Manager
-flatpak install -y flathub com.rtosta.zapzap # Whatsapp App
+# Install Flatpak Packages
+bash ./scripts/run-install-flatpak-pkgs.sh
 
-# Install Oh My ZSH
-sudo dnf install -y zsh curl util-linux-user
-sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --unattended
-chsh -s "$(which zsh)"
+# GNOME Settings
+bash ./scripts/run-gnome-settings.sh
 
-# Install Starship
-curl -sS https://starship.rs/install.sh | sh
-echo 'eval "$(starship init zsh)"' >>~/.zshrc
-
-
-bash ./run-gnome-settings.sh
-
-bash ./run-fix-cedilla.sh
+# Fix Cedilha for PT-BR using US Keyboard
+bash ./scripts/run-fix-cedilla.sh

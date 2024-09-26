@@ -2,7 +2,7 @@
 # fedoraworkstations-postinstall
 
 <p align="center">
-    <img src="static/logo.png" alt="Fedora Logo" width="180">
+    <img src="utils/logo.png" alt="Fedora Logo" width="180">
 </p>
 
 ## Overview
