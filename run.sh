@@ -17,8 +17,10 @@ sudo dnf upgrade --refresh -y
 sudo dnf groupupdate -y core
 sudo dnf install -y rpmfusion-free-release-tainted dnf-plugins-core
 
-# Install Nvidia Drivers
-sudo dnf install -y akmod-nvidia
+# Install Nvidia Drivers if available
+if [ "$(lspci | grep -ic NVIDIA)" -eq 0 ]; then
+    sudo dnf install -y akmod-nvidia
+fi
 
 # Install RPM Packages
 bash ./scripts/run-install-dnf-pkgs.sh
