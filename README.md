@@ -6,7 +6,7 @@
 **Fedora Workstation Post-Install Script**
 =====================================
 
-**Description**
+**Descrição**
 ---------------
 
 Este script automatiza a configuração pós-instalação do Fedora Workstation. Ele executa tarefas como atualizações de firmware, configuração do DNF para downloads mais rápidos, instalação do RPM Fusion, gerenciamento de pacotes, configuração de configurações do GNOME entre outros.
