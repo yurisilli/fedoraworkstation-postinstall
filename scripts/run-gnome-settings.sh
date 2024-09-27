@@ -20,7 +20,6 @@ apply_setting "org.gnome.desktop.interface show-battery-percentage true"
 apply_setting "org.gnome.desktop.wm.preferences button-layout ':minimize,maximize,close'"
 
 # Behavior Settings
-apply_setting "org.gnome.shell.window-switcher current-workspace-only false"
 apply_setting "org.gnome.mutter center-new-windows true"
 apply_setting "org.gnome.mutter auto-maximize false"
 
